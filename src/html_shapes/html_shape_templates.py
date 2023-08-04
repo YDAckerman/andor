@@ -25,8 +25,8 @@ SQUARE_BLINK_TEMPLATE = """
     """
 
 BLANK_TEMPLATE = """
-    min-height: {h}vw;
-    min-width:  {w}vw;
+    height: {h}vw;
+    width:  {w}vw;
     background-color: #2c292d;
     display: inline-block;
     """
