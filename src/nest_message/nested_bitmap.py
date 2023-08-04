@@ -2,15 +2,16 @@ import re
 from .utils import merge_str_lists, unlist, \
     make_circular, zero_out, to_bitmap
 from ..html_shapes.html_shape import HtmlShape
-
+import random
 
 SHAPE_FUNS = {
     "square": HtmlShape.random_square,
     "circle": HtmlShape.random_circle,
     "blank": HtmlShape.blank_space
 }
-
 SPACE_CHAR = '&nbsp;'
+COLORS = ["Yellow", "Orange", "Red", "Green", "Blue", "Purple"]
+SHAPES = ["circle", "square"]
 
 
 class NestedBitmap():
@@ -69,8 +70,8 @@ class NestedBitmap():
                 return SHAPE_FUNS[shape](px, color).get_style()
             return SHAPE_FUNS["blank"](px).get_style()
 
-        return [bit_to_style(bit)
-                for bitline in self.bitmap for bit in bitline]
+        return [[bit_to_style(bit) for bit in bitline]
+                for bitline in self.bitmap]
 
     def get_html_text(self, **kwargs):
 
@@ -101,13 +102,30 @@ class NestedBitmap():
         self.cir_seq = rep_bit
 
 
+def nested_bit_msg(vw, bits, outer, inner):
+
+    pad_n = 1
+    shape = random.choice(SHAPES)
+    color = random.choice(COLORS)
+
+    bit_msg = NestedBitmap(outer, bits)
+    bit_msg.pad_top(pad_n)
+    nest_message = [NestedBitmap(ltr, bits).bitmap
+                    for ltr in inner]
+    bit_msg.replace_bits(nest_message, invert=True)
+    bit_msg_css_styles = bit_msg.get_css_styles(shape, vw, color)
+    bit_msg_width = bit_msg.get_bit_width() * vw
+
+    return bit_msg_width, bit_msg_css_styles
+
+
 def main():
 
-    tmp = NestedBitmat(" AND ", 16)
+    tmp = NestedBitmap(" AND ", 16)
     tmp.replace_bits('OR', invert=False)
     tmp.print()
 
-    tmp = NestedBitmat("  OR ", 16)
+    tmp = NestedBitmap("  OR ", 16)
     tmp.replace_bits('AND', invert=True)
     tmp.print()
 

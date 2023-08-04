@@ -1,32 +1,15 @@
 from flask import Flask
 from flask import render_template
-from src.nest_message.nested_bitmap import NestedBitmap
-import random
+from src.nest_message.nested_bitmap import nested_bit_msg, NestedBitmap
+
 
 app = Flask(__name__)
-
-COLORS = ["Yellow", "Orange", "Red", "Green", "Blue", "Purple"]
-SHAPES = ["circle", "square"]
 
 
 @app.route("/")
 def index():
 
-    SHAPE_VW = .22
-    FONT_BITS = 8
-    MSG_PADDING = 1
-    SHAPE = random.choice(SHAPES)
-    COLOR = random.choice(COLORS)
-
-    bit_msg = NestedBitmap(' AND ', FONT_BITS)
-    bit_msg.pad_top(MSG_PADDING)
-    nest_message = [NestedBitmap(ltr, FONT_BITS).bitmap
-                    for ltr in 'OR']
-    bit_msg.replace_bits(nest_message, invert=True)
-    bit_msg_css_styles = bit_msg.get_css_styles(SHAPE,
-                                                SHAPE_VW,
-                                                COLOR)
-    bit_msg_width = bit_msg.get_bit_width() * SHAPE_VW
+    bit_msg_width, bit_msg_css_styles = nested_bit_msg(.22, 8, ' AND ', 'OR')
 
     return render_template("index.html",
                            bit_msg_styles=bit_msg_css_styles,
@@ -59,22 +42,8 @@ def about():
 @app.route("/projects")
 def projects():
 
-    SHAPE_VW = .2
-    FONT_BITS = 8
-    MSG_PADDING = 1
-    SHAPE = random.choice(SHAPES)
-    COLOR = random.choice(COLORS)
-
-    bit_msg = NestedBitmap.concat(NestedBitmap(' COM ', FONT_BITS),
-                                  NestedBitmap(' ING ', FONT_BITS))
-    bit_msg.pad_top(MSG_PADDING)
-    nest_message = [NestedBitmap(ltr, FONT_BITS).bitmap
-                    for ltr in 'SOON']
-    bit_msg.replace_bits(nest_message, invert=True)
-    bit_msg_css_styles = bit_msg.get_css_styles(SHAPE,
-                                                SHAPE_VW,
-                                                COLOR)
-    bit_msg_width = bit_msg.get_bit_width() * SHAPE_VW
+    bit_msg_width, bit_msg_css_styles = nested_bit_msg(.15, 8,
+                                                       ' COMING ', 'SOON')
 
     return render_template("index.html",
                            bit_msg_styles=bit_msg_css_styles,
@@ -85,22 +54,8 @@ def projects():
 @app.route("/notes")
 def notes():
 
-    SHAPE_VW = .2
-    FONT_BITS = 8
-    MSG_PADDING = 1
-    SHAPE = random.choice(SHAPES)
-    COLOR = random.choice(COLORS)
-
-    bit_msg = NestedBitmap.concat(NestedBitmap(' COM ', FONT_BITS),
-                                  NestedBitmap(' ING ', FONT_BITS))
-    bit_msg.pad_top(MSG_PADDING)
-    nest_message = [NestedBitmap(ltr, FONT_BITS).bitmap
-                    for ltr in 'SOON']
-    bit_msg.replace_bits(nest_message, invert=True)
-    bit_msg_css_styles = bit_msg.get_css_styles(SHAPE,
-                                                SHAPE_VW,
-                                                COLOR)
-    bit_msg_width = bit_msg.get_bit_width() * SHAPE_VW
+    bit_msg_width, bit_msg_css_styles = nested_bit_msg(.15, 8,
+                                                       ' COMING ', 'SOON')
 
     return render_template("index.html",
                            bit_msg_styles=bit_msg_css_styles,
@@ -111,22 +66,8 @@ def notes():
 @app.route("/designs")
 def designs():
 
-    SHAPE_VW = .2
-    FONT_BITS = 8
-    MSG_PADDING = 1
-    SHAPE = random.choice(SHAPES)
-    COLOR = random.choice(COLORS)
-
-    bit_msg = NestedBitmap.concat(NestedBitmap(' COM ', FONT_BITS),
-                                  NestedBitmap(' ING ', FONT_BITS))
-    bit_msg.pad_top(MSG_PADDING)
-    nest_message = [NestedBitmap(ltr, FONT_BITS).bitmap
-                    for ltr in 'SOON']
-    bit_msg.replace_bits(nest_message, invert=True)
-    bit_msg_css_styles = bit_msg.get_css_styles(SHAPE,
-                                                SHAPE_VW,
-                                                COLOR)
-    bit_msg_width = bit_msg.get_bit_width() * SHAPE_VW
+    bit_msg_width, bit_msg_css_styles = nested_bit_msg(.15, 8,
+                                                       ' COMING ', 'SOON')
 
     return render_template("index.html",
                            bit_msg_styles=bit_msg_css_styles,
