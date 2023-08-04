@@ -1,0 +1,141 @@
+
+body {
+    background-color: #2c292d;
+    display: block;
+    font-family: monospace, monospace;
+}
+
+a:link {
+    color: white;
+    text-decoration: none;
+}
+
+a:visited {
+    color: white;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #ab9df2;
+    text-decoration: none;
+}
+
+.header {
+    width: 100%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    display: flex;
+    justify-content: space-evenly;
+    background-color: #2c292d;
+    color: white;
+    font-size: 20px;
+}
+
+.bit_msg {
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+p {
+    text-align: center;
+    margin-top: -15px;
+}
+
+fieldset {
+    padding: 20px;
+    text-align:center;
+    color: white;
+    width: 100%;
+    border: 2px solid white;
+
+}
+
+@keyframes blink_Purple_10_60 {
+    0%  {background-color: #2c292d;}
+    10% {background-color:#ab9df2;}
+    30% {background-color:#ab9df2;}
+    60% {background-color: #2c292d;}
+}
+
+@keyframes blink_Purple_30_80 {
+    0%  {background-color: #2c292d;}
+    30% {background-color:#ab9df2;}
+    50% {background-color:#ab9df2;}
+    80% {background-color: #2c292d;}
+}
+
+
+@keyframes blink_Blue_10_60 {
+    0%  {background-color: #2c292d;}
+    10% {background-color:#78dce8;}
+    30% {background-color:#78dce8;}
+    60% {background-color: #2c292d;}
+}
+
+@keyframes blink_Blue_30_80 {
+    0%  {background-color: #2c292d;}
+    30% {background-color:#78dce8;}
+    50% {background-color:#78dce8;}
+    80% {background-color: #2c292d;}
+}
+
+
+@keyframes blink_Green_10_60 {
+    0%  {background-color: #2c292d;}
+    10% {background-color:#a9dc76;}
+    30% {background-color:#a9dc76;}
+    60% {background-color: #2c292d;}
+}
+
+@keyframes blink_Green_30_80 {
+    0%  {background-color: #2c292d;}
+    30% {background-color:#a9dc76;}
+    50% {background-color:#a9dc76;}
+    80% {background-color: #2c292d;}
+}
+
+
+@keyframes blink_Red_10_60 {
+    0%  {background-color: #2c292d;}
+    10% {background-color:#ff6188;}
+    30% {background-color:#ff6188;}
+    60% {background-color: #2c292d;}
+}
+
+@keyframes blink_Red_30_80 {
+    0%  {background-color: #2c292d;}
+    30% {background-color:#ff6188;}
+    50% {background-color:#ff6188;}
+    80% {background-color: #2c292d;}
+}
+
+
+@keyframes blink_Orange_10_60 {
+    0%  {background-color: #2c292d;}
+    10% {background-color:#fc9867;}
+    30% {background-color:#fc9867;}
+    60% {background-color: #2c292d;}
+}
+
+@keyframes blink_Orange_30_80 {
+    0%  {background-color: #2c292d;}
+    30% {background-color:#fc9867;}
+    50% {background-color:#fc9867;}
+    80% {background-color: #2c292d;}
+}
+
+
+@keyframes blink_Yellow_10_60 {
+    0%  {background-color: #2c292d;}
+    10% {background-color:#ffd866;}
+    30% {background-color:#ffd866;}
+    60% {background-color: #2c292d;}
+}
+
+@keyframes blink_Yellow_30_80 {
+    0%  {background-color: #2c292d;}
+    30% {background-color:#ffd866;}
+    50% {background-color:#ffd866;}
+    80% {background-color: #2c292d;}
+}
