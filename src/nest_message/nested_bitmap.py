@@ -4,11 +4,6 @@ from .utils import merge_str_lists, unlist, \
 from ..html_shapes.html_shape import HtmlShape
 import random
 
-SHAPE_FUNS = {
-    "square": HtmlShape.random_square,
-    "circle": HtmlShape.random_circle,
-    "blank": HtmlShape.blank_space
-}
 SPACE_CHAR = '&nbsp;'
 COLORS = ["Yellow", "Orange", "Red", "Green", "Blue", "Purple"]
 SHAPES = ["circle", "square"]
@@ -63,12 +58,13 @@ class NestedBitmap():
         new_bm.bitmap = bm1.bitmap + bm2.bitmap
         return new_bm
 
-    def get_css_styles(self, shape, px, color):
+    def get_css_styles(self, shape, vw, color, n, anim):
 
         def bit_to_style(i):
             if i != "0":
-                return SHAPE_FUNS[shape](px, color).get_style()
-            return SHAPE_FUNS["blank"](px).get_style()
+                return HtmlShape.generate_random(vw, color, n,
+                                                 shape, anim).get_style()
+            return HtmlShape.generate_blank(vw).get_style()
 
         return [[bit_to_style(bit) for bit in bitline]
                 for bitline in self.bitmap]
@@ -102,18 +98,19 @@ class NestedBitmap():
         self.cir_seq = rep_bit
 
 
-def nested_bit_msg(vw, bits, outer, inner):
+def to_bit_msg(vw, pad_n, outer_bits, inner_bits,
+               outer_msg, inner_msg, n, animation):
 
-    pad_n = 1
-    shape = random.choice(SHAPES)
+    shape = SHAPES[1]
     color = random.choice(COLORS)
 
-    bit_msg = NestedBitmap(outer, bits)
+    bit_msg = NestedBitmap(outer_msg, outer_bits)
     bit_msg.pad_top(pad_n)
-    nest_message = [NestedBitmap(ltr, bits).bitmap
-                    for ltr in inner]
+    nest_message = [NestedBitmap(ltr, inner_bits).bitmap
+                    for ltr in inner_msg]
     bit_msg.replace_bits(nest_message, invert=True)
-    bit_msg_css_styles = bit_msg.get_css_styles(shape, vw, color)
+    bit_msg_css_styles = bit_msg.get_css_styles(shape, vw, color,
+                                                n, animation)
     bit_msg_width = bit_msg.get_bit_width() * vw
 
     return bit_msg_width, bit_msg_css_styles

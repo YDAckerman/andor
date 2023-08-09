@@ -1,11 +1,9 @@
 from .html_shape_templates import SHAPE_TEMPLATES
-import math
 import random
 
 FADES = ["10_60"] * 3 + ["30_80"] * 10
 MU_SIG = [3, 1]
 DURATION = 20
-COUNT = "infinite"
 
 
 class HtmlShape:
@@ -39,36 +37,27 @@ class HtmlShape:
         return "<div style=\"{}\"></div>".format(self.get_style())
 
     @staticmethod
-    def random_params(px, color):
-        r = px
+    def random_params(vw, color, n):
+        r = vw
         c = color
         du = DURATION
         de = min(abs(random.gauss(*MU_SIG)), 3)
         fd = random.choice(FADES)
-        n = COUNT
 
         return [r, r, c, fd, du, de, n]
 
     @classmethod
-    def random_circle(cls, px, color):
+    def generate_random(cls, vw, color, n, shape, anim):
 
-        inst = cls(*cls.random_params(px, color))
-        inst.set_template(SHAPE_TEMPLATES['circle'])
-
-        return inst
-
-    @classmethod
-    def random_square(cls, px, color):
-
-        inst = cls(*cls.random_params(px, color))
-        inst.set_template(SHAPE_TEMPLATES['square'])
+        inst = cls(*cls.random_params(vw, color, n))
+        inst.set_template(SHAPE_TEMPLATES[shape + '_' + anim])
 
         return inst
 
     @classmethod
-    def blank_space(cls, px=1):
+    def generate_blank(cls, vw=1):
 
-        r = px
+        r = vw
         inst = cls(r, r, None, None, None, None, None)
         inst.set_template(SHAPE_TEMPLATES['blank'])
 

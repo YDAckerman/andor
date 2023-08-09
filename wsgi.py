@@ -1,7 +1,7 @@
 from flask import Flask
 from flask import render_template
-from src.nest_message.nested_bitmap import nested_bit_msg, NestedBitmap
-
+from src.nest_message.nested_bitmap import to_bit_msg
+import re
 
 app = Flask(__name__)
 
@@ -9,7 +9,10 @@ app = Flask(__name__)
 @app.route("/")
 def index():
 
-    bit_msg_width, bit_msg_css_styles = nested_bit_msg(.22, 8, ' AND ', 'OR')
+    bit_msg_width, bit_msg_css_styles = to_bit_msg(.22, 1, 8, 8,
+                                                   ' AND ', 'OR',
+                                                   "infinite",
+                                                   "blink")
 
     return render_template("index.html",
                            bit_msg_styles=bit_msg_css_styles,
@@ -20,30 +23,48 @@ def index():
 @app.route("/about")
 def about():
 
-    MSG_PADDING = 1
-    FONT_BITS = 8
+    MSG_PADDING = 2
+    FONT_BITS = 16
+    VW = .15
 
     with open("./static/about_content/about_message.txt") as f:
-        about_msg = f.read()
+        about_msg = re.sub("\n", " ", f.read())
 
-    msg = NestedBitmap(' Hi ', FONT_BITS)
-    msg.pad_top(MSG_PADDING)
-    msg.replace_bits([["11", "11"]], invert=True)
-    msg.replace_bits(about_msg)
-    text_lines = msg.get_html_text(github_here='github <a '
-                                   + 'href="https://github.com/YDAckerman/"'
-                                   + 'target="_blank" '
-                                   + 'style="color: #78dce8;">here</a>')
+    # msg = NestedBitmap(' Hi ', FONT_BITS)
+    # msg.pad_top(MSG_PADDING)
+    # # msg.replace_bits([["11", "11"]], invert=True)
+    # nest_msg = [NestedBitmap(ltr, 8).bitmap for ltr in about_msg]
+    # msg.replace_bits(nest_msg, invert=True)
+    # styles = msg.get_css_styles("square", VW, "Blue")
+    # width = msg.get_bit_width() * VW
+
+    # return render_template("index.html",
+    #                        bit_msg_styles=styles,
+    #                        bit_msg_width=width)
+
+
+    bit_msg_width, bit_msg_css_styles = to_bit_msg(.15, 2, 16, 8,
+                                                   ' Hi ',
+                                                   about_msg,
+                                                   "1",
+                                                   "fixed"
+                                                   )
 
     return render_template("index.html",
-                           text_lines=text_lines)
+                           bit_msg_styles=bit_msg_css_styles,
+                           bit_msg_width=bit_msg_width
+                           )
 
 
 @app.route("/projects")
 def projects():
 
-    bit_msg_width, bit_msg_css_styles = nested_bit_msg(.15, 8,
-                                                       ' COMING ', 'SOON')
+    bit_msg_width, bit_msg_css_styles = to_bit_msg(.15, 1, 8, 8,
+                                                   ' COMING ',
+                                                   'SOON',
+                                                   "infinite",
+                                                   "blink"
+                                                   )
 
     return render_template("index.html",
                            bit_msg_styles=bit_msg_css_styles,
@@ -54,8 +75,12 @@ def projects():
 @app.route("/notes")
 def notes():
 
-    bit_msg_width, bit_msg_css_styles = nested_bit_msg(.15, 8,
-                                                       ' COMING ', 'SOON')
+    bit_msg_width, bit_msg_css_styles = to_bit_msg(.15, 1, 8, 8,
+                                                   ' COMING ',
+                                                   'SOON',
+                                                   "infinite",
+                                                   "blink"
+                                                   )
 
     return render_template("index.html",
                            bit_msg_styles=bit_msg_css_styles,
@@ -66,8 +91,12 @@ def notes():
 @app.route("/designs")
 def designs():
 
-    bit_msg_width, bit_msg_css_styles = nested_bit_msg(.15, 8,
-                                                       ' COMING ', 'SOON')
+    bit_msg_width, bit_msg_css_styles = to_bit_msg(.15, 1, 8, 8,
+                                                   ' COMING ',
+                                                   'SOON',
+                                                   "infinite",
+                                                   "blink"
+                                                   )
 
     return render_template("index.html",
                            bit_msg_styles=bit_msg_css_styles,

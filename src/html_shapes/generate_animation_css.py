@@ -19,6 +19,11 @@ TEMPLATE = """
     50% {{background-color:{hex};}}
     80% {{background-color: #2c292d;}}
 }}
+
+@keyframes fade_to_{name} {{
+    0%  {{background-color: #2c292d;}}
+    100% {{background-color:{hex};}}
+}}
 """
 
 
