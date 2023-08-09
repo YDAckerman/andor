@@ -9,10 +9,23 @@ app = Flask(__name__)
 @app.route("/")
 def index():
 
-    bit_msg_width, bit_msg_css_styles = to_bit_msg(.22, 1, 8, 8,
-                                                   ' AND ', 'OR',
-                                                   "infinite",
-                                                   "blink")
+    MSG_PADDING = 1
+    INNER_BITS = 8
+    OUTER_BITS = 8
+    VW = .22
+    INNER_MSG = 'OR'
+    OUTER_MSG = ' AND '
+    ANIMATION_COUNT = "inifite"
+    ANIMATION_EFFECT = "blink"
+
+    bit_msg_width, bit_msg_css_styles = to_bit_msg(VW,
+                                                   MSG_PADDING,
+                                                   OUTER_BITS,
+                                                   INNER_BITS,
+                                                   OUTER_MSG,
+                                                   INNER_MSG,
+                                                   ANIMATION_COUNT,
+                                                   ANIMATION_EFFECT)
 
     return render_template("index.html",
                            bit_msg_styles=bit_msg_css_styles,
@@ -24,31 +37,24 @@ def index():
 def about():
 
     MSG_PADDING = 2
-    FONT_BITS = 16
+    INNER_BITS = 8
+    OUTER_BITS = 16
     VW = .15
+    OUTER_MSG = ' Hi '
+    ANIMATION_COUNT = "1"
+    ANIMATION_EFFECT = "fixed"
 
     with open("./static/about_content/about_message.txt") as f:
-        about_msg = re.sub("\n", " ", f.read())
+        INNER_MSG = re.sub("\n", " ", f.read())
 
-    # msg = NestedBitmap(' Hi ', FONT_BITS)
-    # msg.pad_top(MSG_PADDING)
-    # # msg.replace_bits([["11", "11"]], invert=True)
-    # nest_msg = [NestedBitmap(ltr, 8).bitmap for ltr in about_msg]
-    # msg.replace_bits(nest_msg, invert=True)
-    # styles = msg.get_css_styles("square", VW, "Blue")
-    # width = msg.get_bit_width() * VW
-
-    # return render_template("index.html",
-    #                        bit_msg_styles=styles,
-    #                        bit_msg_width=width)
-
-
-    bit_msg_width, bit_msg_css_styles = to_bit_msg(.15, 2, 16, 8,
-                                                   ' Hi ',
-                                                   about_msg,
-                                                   "1",
-                                                   "fixed"
-                                                   )
+    bit_msg_width, bit_msg_css_styles = to_bit_msg(VW,
+                                                   MSG_PADDING,
+                                                   OUTER_BITS,
+                                                   INNER_BITS,
+                                                   OUTER_MSG,
+                                                   INNER_MSG,
+                                                   ANIMATION_COUNT,
+                                                   ANIMATION_EFFECT)
 
     return render_template("index.html",
                            bit_msg_styles=bit_msg_css_styles,
@@ -59,12 +65,23 @@ def about():
 @app.route("/projects")
 def projects():
 
-    bit_msg_width, bit_msg_css_styles = to_bit_msg(.15, 1, 8, 8,
-                                                   ' COMING ',
-                                                   'SOON',
-                                                   "infinite",
-                                                   "blink"
-                                                   )
+    MSG_PADDING = 1
+    INNER_BITS = 8
+    OUTER_BITS = 8
+    VW = .15
+    INNER_MSG = 'SOON'
+    OUTER_MSG = ' COMING '
+    ANIMATION_COUNT = "inifite"
+    ANIMATION_EFFECT = "blink"
+
+    bit_msg_width, bit_msg_css_styles = to_bit_msg(VW,
+                                                   MSG_PADDING,
+                                                   OUTER_BITS,
+                                                   INNER_BITS,
+                                                   OUTER_MSG,
+                                                   INNER_MSG,
+                                                   ANIMATION_COUNT,
+                                                   ANIMATION_EFFECT)
 
     return render_template("index.html",
                            bit_msg_styles=bit_msg_css_styles,
@@ -75,12 +92,23 @@ def projects():
 @app.route("/notes")
 def notes():
 
-    bit_msg_width, bit_msg_css_styles = to_bit_msg(.15, 1, 8, 8,
-                                                   ' COMING ',
-                                                   'SOON',
-                                                   "infinite",
-                                                   "blink"
-                                                   )
+    MSG_PADDING = 1
+    INNER_BITS = 8
+    OUTER_BITS = 8
+    VW = .15
+    INNER_MSG = 'SOON'
+    OUTER_MSG = ' COMING '
+    ANIMATION_COUNT = "inifite"
+    ANIMATION_EFFECT = "blink"
+
+    bit_msg_width, bit_msg_css_styles = to_bit_msg(VW,
+                                                   MSG_PADDING,
+                                                   OUTER_BITS,
+                                                   INNER_BITS,
+                                                   OUTER_MSG,
+                                                   INNER_MSG,
+                                                   ANIMATION_COUNT,
+                                                   ANIMATION_EFFECT)
 
     return render_template("index.html",
                            bit_msg_styles=bit_msg_css_styles,
@@ -91,12 +119,23 @@ def notes():
 @app.route("/designs")
 def designs():
 
-    bit_msg_width, bit_msg_css_styles = to_bit_msg(.15, 1, 8, 8,
-                                                   ' COMING ',
-                                                   'SOON',
-                                                   "infinite",
-                                                   "blink"
-                                                   )
+    MSG_PADDING = 1
+    INNER_BITS = 8
+    OUTER_BITS = 8
+    VW = .15
+    INNER_MSG = 'SOON'
+    OUTER_MSG = ' COMING '
+    ANIMATION_COUNT = "inifite"
+    ANIMATION_EFFECT = "blink"
+
+    bit_msg_width, bit_msg_css_styles = to_bit_msg(VW,
+                                                   MSG_PADDING,
+                                                   OUTER_BITS,
+                                                   INNER_BITS,
+                                                   OUTER_MSG,
+                                                   INNER_MSG,
+                                                   ANIMATION_COUNT,
+                                                   ANIMATION_EFFECT)
 
     return render_template("index.html",
                            bit_msg_styles=bit_msg_css_styles,
