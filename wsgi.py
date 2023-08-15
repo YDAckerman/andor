@@ -11,34 +11,35 @@ app.wsgi_app = ProxyFix(
 )
 
 
-@app.route("/")
-def index():
+# @app.route("/")
+# def index():
 
-    MSG_PADDING = 1
-    INNER_BITS = 8
-    OUTER_BITS = 8
-    VW = .22
-    INNER_MSG = 'OR'
-    OUTER_MSG = ' AND '
-    ANIMATION_COUNT = "inifite"
-    ANIMATION_EFFECT = "blink"
+#     MSG_PADDING = 1
+#     INNER_BITS = 8
+#     OUTER_BITS = 8
+#     VW = .22
+#     INNER_MSG = 'OR'
+#     OUTER_MSG = ' AND '
+#     ANIMATION_COUNT = "inifite"
+#     ANIMATION_EFFECT = "blink"
 
-    bit_msg_width, bit_msg_css_styles = to_bit_msg(VW,
-                                                   MSG_PADDING,
-                                                   OUTER_BITS,
-                                                   INNER_BITS,
-                                                   OUTER_MSG,
-                                                   INNER_MSG,
-                                                   ANIMATION_COUNT,
-                                                   ANIMATION_EFFECT)
+#     bit_msg_width, bit_msg_css_styles = to_bit_msg(VW,
+#                                                    MSG_PADDING,
+#                                                    OUTER_BITS,
+#                                                    INNER_BITS,
+#                                                    OUTER_MSG,
+#                                                    INNER_MSG,
+#                                                    ANIMATION_COUNT,
+#                                                    ANIMATION_EFFECT)
 
-    return render_template("index.html",
-                           bit_msg_styles=bit_msg_css_styles,
-                           bit_msg_width=bit_msg_width
-                           )
+#     return render_template("index.html",
+#                            bit_msg_styles=bit_msg_css_styles,
+#                            bit_msg_width=bit_msg_width
+#                            )
 
 
 @app.route("/about")
+@app.route("/")
 def about():
 
     MSG_PADDING = 2

@@ -27,26 +27,16 @@ SQUARE_BLINK_TEMPLATE = """
 CIRCLE_FIXED_TEMPLATE = """
     height: {h}vw;
     width:  {w}vw;
-    background-color: #2c292d;
+    background-color: #78dce8;
     border-radius: 50%;
     display: inline-block;
-    animation-name: fade_to_{c};
-    animation-duration: {du}s;
-    animation-delay: {de}s;
-    animation-iteration-count: {n};
-    animation-fill-mode: forwards;
     """
 
 SQUARE_FIXED_TEMPLATE = """
     height: {h}vw;
     width:  {w}vw;
-    background-color: #2c292d;
+    background-color: #78dce8;
     display: inline-block;
-    animation-name: fade_to_{c};
-    animation-duration: {du}s;
-    animation-delay: {de}s;
-    animation-iteration-count: {n};
-    animation-fill-mode: forwards;
     """
 
 

@@ -24,6 +24,11 @@ TEMPLATE = """
     0%  {{background-color: #2c292d;}}
     100% {{background-color:{hex};}}
 }}
+
+@keyframes fixed_{name} {{
+    0%  {{background-color: {hex};}}
+    100% {{background-color:{hex};}}
+}}
 """
 
 
