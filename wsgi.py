@@ -75,10 +75,10 @@ def projects():
     INNER_BITS = 8
     OUTER_BITS = 8
     VW = .15
-    INNER_MSG = 'SOON'
-    OUTER_MSG = ' COMING '
-    ANIMATION_COUNT = "inifite"
-    ANIMATION_EFFECT = "blink"
+    INNER_MSG = 'UGH!'
+    OUTER_MSG = ' 404 '
+    ANIMATION_COUNT = "1"
+    ANIMATION_EFFECT = "fixed"
 
     bit_msg_width, bit_msg_css_styles = to_bit_msg(VW,
                                                    MSG_PADDING,
@@ -100,12 +100,12 @@ def notes():
 
     MSG_PADDING = 1
     INNER_BITS = 8
-    OUTER_BITS = 8
-    VW = .15
-    INNER_MSG = 'SOON'
-    OUTER_MSG = ' COMING '
-    ANIMATION_COUNT = "inifite"
-    ANIMATION_EFFECT = "blink"
+    OUTER_BITS = 16
+    VW = .10
+    INNER_MSG = 'WHOOPS!'
+    OUTER_MSG = ' ? '
+    ANIMATION_COUNT = "1"
+    ANIMATION_EFFECT = "fixed"
 
     bit_msg_width, bit_msg_css_styles = to_bit_msg(VW,
                                                    MSG_PADDING,
@@ -127,12 +127,12 @@ def designs():
 
     MSG_PADDING = 1
     INNER_BITS = 8
-    OUTER_BITS = 8
-    VW = .15
-    INNER_MSG = 'SOON'
-    OUTER_MSG = ' COMING '
-    ANIMATION_COUNT = "inifite"
-    ANIMATION_EFFECT = "blink"
+    OUTER_BITS = 16
+    VW = .10
+    INNER_MSG = 'OY'
+    OUTER_MSG = ' VEY! '
+    ANIMATION_COUNT = "1"
+    ANIMATION_EFFECT = "fixed"
 
     bit_msg_width, bit_msg_css_styles = to_bit_msg(VW,
                                                    MSG_PADDING,
