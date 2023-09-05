@@ -103,7 +103,7 @@ def notes():
     OUTER_BITS = 16
     VW = .10
     INNER_MSG = 'WHOOPS!'
-    OUTER_MSG = ' ? '
+    OUTER_MSG = ' um '
     ANIMATION_COUNT = "1"
     ANIMATION_EFFECT = "fixed"
 
