@@ -5,8 +5,13 @@ from ..html_shapes.html_shape import HtmlShape
 import random
 
 SPACE_CHAR = '&nbsp;'
-COLORS = ["Yellow", "Orange", "Red", "Green", "Blue", "Purple"]
-SHAPES = ["circle", "square"]
+COLORS = {"Yellow": '#ffd866',
+          "Orange": '#fc9867',
+          "Red": '#ff6188',
+          "Green": '#a9dc76',
+          "Blue": '#78dce8',
+          "Purple": '#ab9df2',
+          "Black": '#2c292d'}
 
 
 class NestedBitmap():
@@ -58,13 +63,15 @@ class NestedBitmap():
         new_bm.bitmap = bm1.bitmap + bm2.bitmap
         return new_bm
 
-    def get_css_styles(self, shape, vw, color, n, anim):
+    def get_css_styles(self, r, units, color):
+
+        bit_html = HtmlShape.generate_fixed_square(r, units, color)
+        nobit_html = HtmlShape.generate_empty(r, units)
 
         def bit_to_style(i):
             if i != "0":
-                return HtmlShape.generate_random(vw, color, n,
-                                                 shape, anim).get_style()
-            return HtmlShape.generate_blank(vw).get_style()
+                return bit_html.get_style()
+            return nobit_html.get_style()
 
         return [[bit_to_style(bit) for bit in bitline]
                 for bitline in self.bitmap]
@@ -98,20 +105,19 @@ class NestedBitmap():
         self.cir_seq = rep_bit
 
 
-def to_bit_msg(vw, pad_n, outer_bits, inner_bits,
-               outer_msg, inner_msg, n, animation):
+def to_bit_msg(r, units, pad_n,
+               outer_bits, inner_bits,
+               outer_msg, inner_msg):
 
-    shape = SHAPES[1]
-    color = random.choice(COLORS)
+    color = random.choice(list(COLORS.values())[0:-1])
 
     bit_msg = NestedBitmap(outer_msg, outer_bits)
     bit_msg.pad_top(pad_n)
     nest_message = [NestedBitmap(ltr, inner_bits).bitmap
                     for ltr in inner_msg]
     bit_msg.replace_bits(nest_message, invert=True)
-    bit_msg_css_styles = bit_msg.get_css_styles(shape, vw, color,
-                                                n, animation)
-    bit_msg_width = bit_msg.get_bit_width() * vw
+    bit_msg_css_styles = bit_msg.get_css_styles(r, units, color)
+    bit_msg_width = bit_msg.get_bit_width() * r
 
     return bit_msg_width, bit_msg_css_styles
 
@@ -124,6 +130,9 @@ def main():
 
     tmp = NestedBitmap("  OR ", 16)
     tmp.replace_bits('AND', invert=True)
+    tmp.print()
+
+    tmp = NestedBitmap("H", 16)
     tmp.print()
 
 

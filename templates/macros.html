@@ -1,0 +1,45 @@
+{% macro make_bit_letter(letter_style, width, width_units) -%}
+     {% for line in letter_style %}
+      <div class="bit_msg", style="width: 100%;">
+          {% for s in line %}
+            <span style="{{s}}"></span>
+          {% endfor %}
+      </div>
+     {% endfor %}
+   {%- endmacro %}
+
+{% macro make_rellax_limit(top, limit) -%}
+     {% if top >= 0 %}
+        data-rellax-min="{{limit}}"
+     {% else %}
+        data-rellax-max="{{limit}}"
+     {% endif %}
+{%- endmacro %}
+   
+{% macro make_bit_msg(letter_styles, width, units, top_em, side, side_em) -%}
+
+   {% set num_letters = letter_styles | length %}
+   
+   <div class="msgbox absolute"
+        style="width:{{width * num_letters}}{{units}}; 
+               height:{{width}}{{units}}; 
+               top:{{top_em}}em; {{side}}:{{side_em}}em;">
+     {% for i in range(num_letters) %}
+            {% set top = [-2, 2] | random %}
+            {% set z = [0,1,2,3,4] | random %}
+            {% set rellax_speed = top * (100 - top_em + 10) / 100 %}
+            {% set rellax_limit = -1 * top * 16 %}
+            <div class="rellax absolute"
+                 data-rellax-speed="{{rellax_speed}}"
+                 {{ make_rellax_limit(top, rellax_limit) }}
+                 style="z-index: {{z}};
+                        width:  {{width}}{{units}};
+                        height: {{width}}{{units}};
+                        top: {{top}}{{units}};
+                        left: {{width * i}}{{units}};">
+                {{ make_bit_letter(letter_styles[i], width, units) }}               
+            </div>
+     {% endfor %}
+   </div>
+
+{%- endmacro %}
