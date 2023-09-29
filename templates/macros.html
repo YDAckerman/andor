@@ -1,45 +1,52 @@
-{% macro make_bit_letter(letter_style, width, width_units) -%}
-     {% for line in letter_style %}
-      <div class="bit_msg", style="width: 100%;">
-          {% for s in line %}
-            <span style="{{s}}"></span>
-          {% endfor %}
-      </div>
-     {% endfor %}
-   {%- endmacro %}
-
-{% macro make_rellax_limit(top, limit) -%}
-     {% if top >= 0 %}
-        data-rellax-min="{{limit}}"
-     {% else %}
-        data-rellax-max="{{limit}}"
-     {% endif %}
+{% macro make_bit_msg(styles) -%}
+{% for line in styles %}
+<div class="bitmap">
+  {% for bit_style in line %}
+  <div style="{{bit_style}}"></div>
+  {% endfor %}
+</div>
+{% endfor %}
 {%- endmacro %}
-   
-{% macro make_bit_msg(letter_styles, width, units, top_em, side, side_em) -%}
 
-   {% set num_letters = letter_styles | length %}
-   
-   <div class="msgbox absolute"
-        style="width:{{width * num_letters}}{{units}}; 
-               height:{{width}}{{units}}; 
-               top:{{top_em}}em; {{side}}:{{side_em}}em;">
-     {% for i in range(num_letters) %}
-            {% set top = [-2, 2] | random %}
-            {% set z = [0,1,2,3,4] | random %}
-            {% set rellax_speed = top * (100 - top_em + 10) / 100 %}
-            {% set rellax_limit = -1 * top * 16 %}
-            <div class="rellax absolute"
-                 data-rellax-speed="{{rellax_speed}}"
-                 {{ make_rellax_limit(top, rellax_limit) }}
-                 style="z-index: {{z}};
-                        width:  {{width}}{{units}};
-                        height: {{width}}{{units}};
-                        top: {{top}}{{units}};
-                        left: {{width * i}}{{units}};">
-                {{ make_bit_letter(letter_styles[i], width, units) }}               
-            </div>
-     {% endfor %}
-   </div>
-
+{% macro make_header(header) -%}
+{% for side in ['left', 'right'] %}
+<div class="{{ side }}"
+     style="width: 50%; 
+            heigth: 100%; 
+            margin-{{side}}: 1em;">
+  <a href="{{ url_for(header[side]['path']) }}" style="position: relative;">
+    <div style="width: {{ header[side]['width'] }}{{ header['units'] }}; 
+                height: {{ header['height'] }}{{ header['units'] }};
+                position: relative;
+                z-index: 1;"
+         alt="{{ header[side]['path'] }}">
+      {{ make_bit_msg(header[side]['front_styles']) }}
+    </div>
+    <div class="link"
+         style="width: {{ header[side]['width'] }}{{ header['units'] }}; 
+                height: {{ header['height'] }}{{ header['units'] }};
+                position: absolute;
+                top: .2em;
+                left: .2em;
+                z-index: 0;">
+      {{ make_bit_msg(header[side]['link_styles']) }}
+    </div>
+  </a>
+</div>
+{% endfor %}
 {%- endmacro %}
+
+{% macro make_message(message) -%}
+<div style="width: {{ message['message']['width'] }}{{ message['units'] }}; 
+            height: {{ message['height'] }}{{message['units']}};
+            margin-top: 3em;
+            margin-bottom: 3em;"
+     alt="hi! you've reached yoni. i'm away from my website
+          right now. so please: leave a message after the... *BEEP*">
+  {% for part in ['message', 'beep'] %}
+  {{ make_bit_msg(message[part]['styles']) }}
+  {% endfor %}
+</div>
+{%- endmacro %}
+
+

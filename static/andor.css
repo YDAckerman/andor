@@ -1,62 +1,133 @@
 
+@font-face {
+  font-family: ibm;
+  src: url('Px437_IBM_BIOS.ttf') format('truetype');
+  src: url('Web437_IBM_BIOS.woff') format('woff');
+}
+
 body {
     background-color: #2c292d;
-    font-family: monospace, monospace;
+    font-family: ibm;
     font-size: 100%;
-    height: 230em;
     color: white;
-}
-
-a:link {
-    color: white;
-    text-decoration: none;
-}
-
-a:visited {
-    color: white;
-    text-decoration: none;
-}
-
-a:hover {
-    color: #ab9df2;
-    text-decoration: none;
 }
 
 .header {
     width: 100%;
-    margin-top: 5%;
-    margin-bottom: 5%;
+    height: 2em;
     display: flex;
+    border-bottom: .2em solid #ff6188;
     justify-content: space-evenly;
-    background-color: #2c292d;
-    color: white;
+    margin-top: 1em;
 }
 
-.bit_msg {
+.relative {
+    position: relative;
+}
+
+.full_width {
+    width: 100%;
+}
+
+.half_width {
+    width: 50%;
+}
+
+.full_height {
+    height: 100%;
+}
+
+.border {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+input[type="text"], input[type="email"], textarea {
+    height: 2em;
+    color: white;
+    background-color: #2c292d;
+    border:  .3em solid #a9dc76;
+    font-weight: bold;
+    font-size: 1em;
+    font-family: ibm;
+    margin: .5em;
+}
+
+textarea {
+    padding: 1em;
+}
+
+input[type="submit"] {
+    height: 3em;
+    color: #2c292d;
+    border:  .3em solid #ff6188;
+    background-color: #ff6188;
+    font-weight: bold;
+    font-size: 1em;
+    font-family: ibm;
+}
+
+input[type="text"]:focus, input[type="email"]:focus, textarea:focus  {
+    outline: none !important;
+    border-color: #ffd866;
+}
+
+input[type="submit"]:hover {
+    background-color: #78dce8;
+    border-color: #78dce8;
+}
+
+input[type="submit"]:focus {
+    outline: none !important;
+}
+
+.content {
+    height: 100%; 
+    width: 100%; 
+    display: flex; 
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin-top: 3em;
+}
+
+.left {
+    display: flex;
+    justify-content: left;
+}
+
+.right {
+    display: flex;
+    justify-content: right;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+}
+
+.bitmap {
+    width: 100%;
     flex-wrap: wrap;
     display: flex;
     justify-content: space-evenly;
 }
 
-p {
-    text-align: center;
-    margin-top: -15px;
+.link {
+    visibility: hidden;
 }
 
-.wrapper {
-    position: relative;
-    z-index: 0;
-    border: 2px dashed white;
-    width: 100%;
-    height: 100%;
+a:hover .link {
+    visibility: visible;
 }
 
-.absolute {
-    position: absolute;
+a {
+    color: #78dce8;
+    text-decoration: none;
 }
-
-.relative {
-    position: relative;
+a:hover {
+    color: #ff6188;
 }
 
 .footer {

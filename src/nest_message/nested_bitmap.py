@@ -18,21 +18,30 @@ class NestedBitmap():
 
     cir_seq = None
 
-    def __init__(self, msg, size):
+    def __init__(self, msg, size, pad=None, units=None, color=None):
 
         self.bitmap = to_bitmap(msg, size)
         self.size = size
+        self.units = units
+
+        if pad:
+            self.pad_top(pad[0])
+            self.pad_bottom(pad[1])
+
+        if color:
+            self.color = COLORS[color]
+        else:
+            self.color = random.choice(list(COLORS.values())[0:-1])
 
     def pad_top(self, space):
-        self.bitmap = [self.bitmap[-1] for _ in range(space)] \
+        self.bitmap = ['0' * self.get_bit_width() for _ in range(space)] \
             + self.bitmap
 
     def pad_bottom(self, space):
         self.bitmap = self.bitmap \
-            + [self.bitmap[-1] for _ in range(space)]
+            + ['0' * self.get_bit_width() for _ in range(space)]
 
     def replace_bits(self, new_ones, invert=False):
-
         self._set_circular_sequencer(new_ones, invert)
         self.bitmap = unlist([self._replace_bits(line)
                               for line in self.bitmap])
@@ -56,17 +65,22 @@ class NestedBitmap():
 
     @classmethod
     def concat(cls, bm1, bm2):
-        if bm1.size != bm2.size:
+        if bm1.get_bit_width() != bm2.get_bit_width():
             ValueError("NestedBitmat -> concat -> mismatched size")
 
         new_bm = cls(" ", bm1.size)
         new_bm.bitmap = bm1.bitmap + bm2.bitmap
         return new_bm
 
-    def get_css_styles(self, r, units, color):
+    def append(self, other):
+        if self.get_bit_width() != other.get_bit_width():
+            ValueError("NestedBitmat -> append -> mismatched width")
+        self.bitmap = self.bitmap + other.bitmap
 
-        bit_html = HtmlShape.generate_fixed_square(r, units, color)
-        nobit_html = HtmlShape.generate_empty(r, units)
+    def get_css_styles(self, r):
+
+        bit_html = HtmlShape.generate_fixed_square(r, self.units, self.color)
+        nobit_html = HtmlShape.generate_empty(r, self.units)
 
         def bit_to_style(i):
             if i != "0":
@@ -105,9 +119,20 @@ class NestedBitmap():
         self.cir_seq = rep_bit
 
 
-def to_bit_msg(r, units, pad_n,
-               outer_bits, inner_bits,
-               outer_msg, inner_msg):
+def to_bitmap_html(r, units, pad_n, bits, msg, color=None):
+
+    if color:
+        color = COLORS[color]
+    else:
+        color = random.choice(list(COLORS.values())[0:-1])
+    bit_msg = NestedBitmap(msg, bits)
+    bit_msg.pad_top(pad_n)
+    return bit_msg.get_css_styles(r, units, color)
+
+
+def make_nested_msg(r, units, pad_n,
+                    outer_bits, inner_bits,
+                    outer_msg, inner_msg):
 
     color = random.choice(list(COLORS.values())[0:-1])
 

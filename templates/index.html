@@ -7,30 +7,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link href="/static/andor.css" rel="stylesheet"/>
     <link rel="icon" href="/static/favicon.ico" type="image/x-icon"/>
+    <link rel="apple-touch-icon" sizes="180x180"    href="/static/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16"
+          href="/static/favicon-16x16.png">
+    {% import "macros.html" as macros %}
   </head>
   <body>
+
+    <!-- Hi! -->    
+    
     <div class="header">
-      <a href="{{ url_for('about') }}">about</a>
-      <a href="{{ url_for('projects') }}">projects</a>
-      <a href="{{ url_for('designs') }}">designs</a>
-      <a href="{{ url_for('notes') }}">notes</a>
+      {{ macros.make_header(header) }}      
     </div>
-    
-    <!-- Welcome Page -->
-    <div style="width: 100%; 
-                display: flex; 
-                justify-content: center;
-                margin-top: 30vh;">
-     <div style="width: {{bit_msg_width}}vw;">
-      {% for line in bit_msg_styles %}
-      <div class="bit_msg", style="width: 100%;">
-        {% for s in line %}
-        <span style="{{s}}"></span>
-        {% endfor %}
-      </div>
-      {% endfor %}
-     </div>
+
+    <div class="content">
+      {% block content %} {% endblock %}
     </div>
-    
+
+    <div class="footer">
+
+    </div>
+
   </body>
 </html>
