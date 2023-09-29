@@ -31,10 +31,10 @@ def more():
     return render_template("more.html", header=HEADER)
 
 
-@app.route("/credits")
-def credits():
+@app.route("/acknowledgements")
+def acknowledgements():
 
-    return render_template("credits.html", header=HEADER)
+    return render_template("acknowledgements.html", header=HEADER)
 
 
 @app.route("/send", methods=['POST'])

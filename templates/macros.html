@@ -8,6 +8,12 @@
 {% endfor %}
 {%- endmacro %}
 
+{% macro make_txt_msg(text_lines) -%}
+{% for line in text_lines %}
+  <p style="font-size: .01em; color: #ffd866;">{{line | safe}}</p>
+{% endfor %}
+{%- endmacro %}
+
 {% macro make_header(header) -%}
 {% for side in ['left', 'right'] %}
 <div class="{{ side }}"
@@ -39,13 +45,12 @@
 {% macro make_message(message) -%}
 <div style="width: {{ message['message']['width'] }}{{ message['units'] }}; 
             height: {{ message['height'] }}{{message['units']}};
-            margin-top: 3em;
-            margin-bottom: 3em;"
+            margin-top: 2em;
+            margin-bottom: 8em;"
      alt="hi! you've reached yoni. i'm away from my website
           right now. so please: leave a message after the... *BEEP*">
-  {% for part in ['message', 'beep'] %}
-  {{ make_bit_msg(message[part]['styles']) }}
-  {% endfor %}
+  {{ make_bit_msg(message['message']['styles']) }}
+  {{ make_txt_msg(message['beep']['text']) }}
 </div>
 {%- endmacro %}
 

@@ -5,6 +5,7 @@ from ..html_shapes.html_shape import HtmlShape
 import random
 
 SPACE_CHAR = '&nbsp;'
+# SPACE_CHAR = '∙'
 COLORS = {"Yellow": '#ffd866',
           "Orange": '#fc9867',
           "Red": '#ff6188',

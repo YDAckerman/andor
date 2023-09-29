@@ -16,12 +16,11 @@ MSG_LINES = [
     "after the...          ",
     "                      ",
     "                      ",
-    "                      ",
-    "                      ",
-    "       *BEEP*         "
+    "*BEEP*"
 ]
 
 BEEP_BITMAP = NestedBitmap(MSG_LINES[-1], BITS, PAD, UNITS, BEEP_COLOR)
+BEEP_BITMAP.replace_bits('█')
 
 MSG_BITMAP = NestedBitmap(MSG_LINES[0], BITS, PAD, UNITS, MSG_COLOR)
 for line in MSG_LINES[1:-1]:
@@ -31,10 +30,12 @@ for line in MSG_LINES[1:-1]:
 
 MESSAGE = {
     'message': {
+        'text': MSG_BITMAP.get_html_text(),
         'styles': MSG_BITMAP.get_css_styles(R),
         'width': R * len(MSG_LINES[0]) * BITS
     },
     'beep': {
+        'text': BEEP_BITMAP.get_html_text(),
         'styles': BEEP_BITMAP.get_css_styles(R),
         'width': R * len(MSG_LINES[0]) * BITS
     },
