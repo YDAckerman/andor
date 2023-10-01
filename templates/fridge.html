@@ -1,0 +1,69 @@
+{% extends "index.html" %}
+
+{% block content %}
+    <div style="position: relative; width: 100%; height: 80em;">
+    {% for m in magnets %}
+        {{ macros.make_magnet(m[0], m[1], [m[2], m[3]]) }}
+    {% endfor %}
+    </div>
+{% endblock %}
+
+{% block scripts %}
+
+var magnets = document.getElementsByClassName("magnet");
+
+for (let i = 0; i < magnets.length; i++) {
+    dragElement(magnets[i]);
+}
+
+// Sources:
+// https://www.w3schools.com/howto/howto_js_draggable.asp
+// https://www.redblobgames.com/making-of/draggable/
+function dragElement(elmnt) {
+    var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+    document.getElementById(elmnt.id).onpointerdown = dragPointerDown;
+
+    function dragPointerDown(e) {
+        e = e || window.event;
+        e.preventDefault();
+        // get the mouse cursor position at startup:
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        document.onpointerup = closeDragElement;
+        // call a function whenever the cursor moves:
+        document.onpointermove = elementDrag;
+    }
+
+    function elementDrag(e) {
+        e = e || window.event;
+        e.preventDefault();
+        // calculate the new cursor position:
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        // set the element's new position:
+        elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+        elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+    }
+
+    function closeDragElement() {
+        /* stop moving when mouse button is released:*/
+        document.onpointerup = null;
+        document.onpointermove = null;
+    }
+}
+
+window.addEventListener("beforeunload", (event) => {
+    var data = new FormData();
+    var magnets = document.getElementsByClassName("magnet");
+    for (let i = 0; i < magnets.length; i++) {
+        const m = magnets[i];
+        const w = m.children[0].innerHTML;
+        const w_id = m.id;
+        data.append(w + "_" + w_id, m.offsetTop + "_" + m.offsetLeft);
+    }
+    navigator.sendBeacon("/fridge", data);
+}); 
+
+{% endblock %}

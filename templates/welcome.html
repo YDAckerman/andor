@@ -1,0 +1,36 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+{{ macros.make_message(message) }}
+
+
+<div style="width: {{ message['message']['width'] }}{{ message['units'] }}; 
+            display: flex; 
+            justify-content: center;
+            margin-top: 2em;">
+  <form action="{{ url_for('send') }}" method="post">
+    <div style="width: 100%">
+      <div style="width:100%; display: flex; justify-content: left;">
+        <input style="width: 13em;"
+               type="text" id="name" name="name" value="anonymous">
+        <input style="width: 14em;"
+               type="email" id="email" name="email" value="person@mystery.ai">
+      </div>
+    </div>
+    <div style="width: 100%;">
+      <textarea style="width: 27em; height: 12em;"
+                id="msg" name="msg" required></textarea>
+    </div>
+    <div style="width: 100%; display: flex; justify-content: center;">
+      <input type="submit" value="SEND">
+    </div>
+  </form>
+</div>
+
+
+{% endblock %}
+
+{% block footer %}
+{{ super() }}
+{% endblock %}
