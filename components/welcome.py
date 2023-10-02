@@ -28,7 +28,7 @@ for line in MSG_LINES[1:-1]:
         NestedBitmap(line, BITS, PAD, UNITS, MSG_COLOR)
     )
 
-MESSAGE = {
+WELCOME = {
     'message': {
         'text': MSG_BITMAP.get_html_text(),
         'styles': MSG_BITMAP.get_css_styles(R),

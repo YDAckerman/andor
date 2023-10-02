@@ -1,7 +1,8 @@
 import os
 from flask import Flask, render_template, request
 from components.header import HEADER
-from components.message import MESSAGE
+from components.welcome import WELCOME
+from components.messages import record_message
 from components.fridge import get_magnets, update_magnets
 from src.db.db import init_app as db_init_app, get_conn
 from werkzeug.middleware.proxy_fix import ProxyFix
@@ -19,13 +20,27 @@ app.config.from_mapping(
 db_init_app(app)
 
 
-@app.route("/andor")
 @app.route("/")
+def index():
+    return render_template("andor.html",
+                           header=HEADER,
+                           message=WELCOME)
+
+
+@app.route("/andor", methods=['GET', 'POST'])
 def andor():
 
-    return render_template("welcome.html",
+    response = ""
+
+    if request.method == 'POST':
+        get_conn()
+        record_message(request.form)
+        response = "message received!"
+
+    return render_template("andor.html",
                            header=HEADER,
-                           message=MESSAGE)
+                           message=WELCOME,
+                           response=response)
 
 
 @app.route("/more")
@@ -43,28 +58,12 @@ def acknowledgements():
 @app.route("/fridge", methods=['GET', 'POST'])
 def fridge():
 
+    get_conn()
+
     if request.method == 'POST':
+        update_magnets(request.form.items())
 
-        def to_dict(k, v):
-            word = k.split("_")[0]
-            top, left = v.split("_")
-            return {'word': word, 'top': top, 'left': left}
-
-        data = [to_dict(k, v) for k, v in request.form.items()]
-        update_magnets(data)
-
-        return render_template("fridge.html", header=HEADER)
-    else:
-        get_conn()
-        magnets = get_magnets()
-        return render_template("fridge.html",
-                               header=HEADER,
-                               magnets=magnets)
-
-
-@app.route("/send", methods=['POST'])
-def send():
-
-    return render_template("welcome.html",
+    magnets = get_magnets()
+    return render_template("fridge.html",
                            header=HEADER,
-                           message=MESSAGE)
+                           magnets=magnets)

@@ -23,8 +23,8 @@ CREATE TABLE magnets (
 
 insert_message = """
 
-INSERT INTO messages
-VALUES (%(sender)s, %(email)s, %(message)s);
+INSERT INTO messages (time, sender, email, message)
+VALUES (:time, :sender, :email, :message);
 
 """
 

@@ -9,7 +9,7 @@
             display: flex; 
             justify-content: center;
             margin-top: 2em;">
-  <form action="{{ url_for('send') }}" method="post">
+  <form action="{{ url_for('andor') }}" method="post">
     <div style="width: 100%">
       <div style="width:100%; display: flex; justify-content: left;">
         <input style="width: 13em;"
@@ -28,6 +28,9 @@
   </form>
 </div>
 
+<div style="width: 100%; display: flex; justify-content: center;">
+<p> {{ response }} </p>
+</div> 
 
 {% endblock %}
 

@@ -7,6 +7,15 @@ def get_magnets():
 
 
 def update_magnets(data):
+
+    def to_dict(k, v):
+        word = k.split("_")[0]
+        top, left = v.split("_")
+        return {'word': word, 'top': top, 'left': left}
+
+    new_words = [to_dict(k, v) for k, v in data]
+
     db_submit(delete_words, {})
-    db_submit_many(insert_word, data)
+    db_submit_many(insert_word, new_words)
+
     pass
