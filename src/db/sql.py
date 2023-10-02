@@ -9,6 +9,7 @@ CREATE TABLE messages (
   sender TEXT,
   email TEXT,
   message TEXT,
+  read INT
 );
 
 DROP TABLE IF EXISTS magnets;
@@ -23,8 +24,8 @@ CREATE TABLE magnets (
 
 insert_message = """
 
-INSERT INTO messages (time, sender, email, message)
-VALUES (:time, :sender, :email, :message);
+INSERT INTO messages (time, sender, email, message, read)
+VALUES (:time, :sender, :email, :message, 0);
 
 """
 
