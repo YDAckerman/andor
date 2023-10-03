@@ -27,7 +27,7 @@
 
 {% macro make_txt_msg(text_lines) -%}
 {% for line in text_lines %}
-  <p style="font-size: 1em; color: #ffd866;">{{line | safe}}</p>
+  <p style="font-size: .5em; color: #ffd866;">{{line | safe}}</p>
 {% endfor %}
 {%- endmacro %}
 
