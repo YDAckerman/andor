@@ -1,5 +1,5 @@
-from src.db.db import db_submit, db_submit_many, db_extract
-from src.db.sql import delete_words, insert_word, get_words
+from src.db.db import db_submit_many, db_extract
+from src.db.sql import insert_words, get_words
 
 
 def get_magnets():
@@ -9,13 +9,13 @@ def get_magnets():
 def update_magnets(data):
 
     def to_dict(k, v):
-        word = k.split("_")[0]
+        word, row_id = k.split("_")
         top, left = v.split("_")
-        return {'word': word, 'top': top, 'left': left}
+        return {'id': row_id, 'word': word, 'top': top, 'left': left}
 
     new_words = [to_dict(k, v) for k, v in data]
 
-    db_submit(delete_words, {})
-    db_submit_many(insert_word, new_words)
+    print(new_words)
+    db_submit_many(insert_words, new_words)
 
     pass

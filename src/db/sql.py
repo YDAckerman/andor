@@ -35,10 +35,12 @@ DELETE FROM magnets;
 
 """
 
-insert_word = """
+insert_words = """
 
-INSERT INTO magnets (word, top, left)
-VALUES (:word, :top, :left);
+INSERT INTO magnets (rowid, word, top, left)
+VALUES (:id, :word, :top, :left)
+ON CONFLICT(rowid) DO
+UPDATE SET top = excluded.top, left = excluded.left;
 
 """
 

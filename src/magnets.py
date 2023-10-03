@@ -177,6 +177,8 @@ def main():
     conn.commit()
     conn.close()
 
+    print("Magnets altered.")
+
 
 if __name__ == '__main__':
 

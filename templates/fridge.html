@@ -49,21 +49,24 @@ function dragElement(elmnt) {
 
     function closeDragElement() {
         /* stop moving when mouse button is released:*/
+        postNewPosition();
+        
         document.onpointerup = null;
         document.onpointermove = null;
     }
+
+    function postNewPosition() {
+        
+        w = elmnt.children[0].innerHTML;
+        var data = new FormData();
+        data.append(w + "_" + elmnt.id,
+                    elmnt.offsetTop + "_" + elmnt.offsetLeft);
+        navigator.sendBeacon("/fridge", data);
+        
+    }
 }
 
-window.addEventListener("beforeunload", (event) => {
-    var data = new FormData();
-    var magnets = document.getElementsByClassName("magnet");
-    for (let i = 0; i < magnets.length; i++) {
-        const m = magnets[i];
-        const w = m.children[0].innerHTML;
-        const w_id = m.id;
-        data.append(w + "_" + w_id, m.offsetTop + "_" + m.offsetLeft);
-    }
-    navigator.sendBeacon("/fridge", data);
-}); 
+// window.addEventListener("beforeunload", saveMagnets);
+// window.addEventListener("onunload", saveMagnets); 
 
 {% endblock %}
