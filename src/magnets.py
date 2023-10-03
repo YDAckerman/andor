@@ -16,8 +16,8 @@ VALUES (:word, :top, :left);
 
 # Original word list: https://magneticpoetrymnl.com/pages/starter-kit-word-list
 
-BOUND_TOP = 1000
-BOUND_LEFT = 1000
+BOUND_TOP = 2000
+BOUND_LEFT = 1200
 
 MAGNETS = [
 
@@ -25,13 +25,14 @@ MAGNETS = [
     "a", "a", "about", "above", "act", "again", "age", "air",
     "all", "alone", "always", "am", "an", "an", "and", "and", "and",
     "and", "angry", "are", "are", "as", "as", "ask",
-    "at", "at", "away", "arch", "art",
+    "at", "at", "away", "arch", "art", "are", "are", "are", "are", "are",
 
     "b",
-    "bad", "be", "be", "be", "beauty", "bed", "boy", "bro",
+    "bad", "be", "be", "be", "be", "beauty", "bed", "boy", "bro",
     "been", "begin", "being", "believe", "belong", "bitter", "block",
     "break", "bring", "burn", "burst", "beefcake", "boba",
-    "board", "but", "but", "by", "by", "bit", "byte", "block", "base",
+    "board", "but", "but", "but", "but", "but",
+    "by", "by", "by", "bit", "byte", "block", "base",
 
     "c",
     "call", "cutting", "cook",
@@ -57,7 +58,7 @@ MAGNETS = [
 
     "g",
     "garden", "gas", "get", "give", "go", "gone",
-    "game", "good", "girl", "ghost",
+    "game", "good", "girl", "ghost", "get", "got", "got", "get",
 
     "h",
     "hand", "happen", "happiness", "happy", "hard", "has",
@@ -66,12 +67,12 @@ MAGNETS = [
     "hour", "how", "hungry", "hyper", "how", "human",
 
     "i",
-    "I", "I", "i", "ist", "ist", "ism", "ism",
-    "if", "in", "in", "in",
-    "in", "ing", "ing", "is", "is", "it", "it",
+    "I", "I", "i", "ist", "ist", "ism", "ism", "ism", "ism",
+    "if", "in", "in", "in", "if", "if", "if",
+    "in", "ing", "ing", "is", "is", "it", "it", "ing", "ing", "ing",
 
     "j",
-    "just", "just",
+    "just", "just", "just", "just",
 
     "k",
     "keep", "keto", "ken", "know",
@@ -89,11 +90,12 @@ MAGNETS = [
 
     "n",
     "name", "near", "need", "never", "new", "next", "night",
-    "no", "not", "not", "nothing", "now", "number",
+    "no", "not", "not", "not", "not", "nothing", "now", "number",
 
     "o",
-    "of", "of", "okay", "ocean", "our",
-    "old", "on", "on", "one", "or", "or", "our", "out", "over", "own",
+    "of", "of", "of", "of", "okay", "ocean", "our",
+    "old", "on", "on", "one", "or", "or", "or", "or", "our", "out",
+    "over", "own",
 
     "p",
     "page", "people", "play", "please", "pretty",
@@ -120,11 +122,11 @@ MAGNETS = [
     "table", "take", "talk", "tawny", "tribute",
     "tear", "tell", "thank", "the", "the", "the", "their", "there", "these",
     "they", "they", "thing", "think", "those", "thought", "through", "time",
-    "twilight", "than", "than", "trial",
-    "to", "to", "today", "try",
+    "twilight", "than", "than", "than", "than", "than", "trial",
+    "to", "to", "to", "to", "to", "today", "try",
 
     "u",
-    "us", "use", "under",
+    "us", "us", "us", "use", "use", "use", "under",
 
     "v",
     "very", "vibe", "vibe", "vibe", "vampire", "village",
@@ -133,7 +135,7 @@ MAGNETS = [
     "wait", "walk", "want", "warm", "was", "was", "water", "way", "we",
     "week", "well", "were", "wet", "what", "when", "white", "who", "why",
     "will", "will", "window", "wish", "with", "with", "wonder", "word",
-    "work", "would", "write",
+    "work", "would", "write", "we", "we", "we", "with", "with", "with",
 
     "x",
 
