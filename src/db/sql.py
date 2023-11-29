@@ -20,6 +20,14 @@ CREATE TABLE magnets (
   left REAL
 );
 
+DROP TABLE IF EXISTS wordles;
+
+CREATE TABLE wordles (
+  number REAL,
+  date TEXT,
+  word TEXT
+);
+
 """
 
 insert_message = """

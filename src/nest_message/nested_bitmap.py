@@ -54,7 +54,7 @@ class NestedBitmap():
             return x
 
         print(tmp(self.bitmap[-1]))
-        for line in self.bitmap:
+        for line in self.bitmap: 
             print(tmp(line))
 
     def get_bit_width(self):

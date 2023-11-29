@@ -15,7 +15,7 @@ app.wsgi_app = ProxyFix(
 
 app.config.from_mapping(
         DATABASE=os.path.join(app.instance_path, 'andor.db'),
-    )
+)
 
 db_init_app(app)
 

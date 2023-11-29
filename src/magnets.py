@@ -37,7 +37,7 @@ MAGNETS = [
     "c",
     "call", "cutting", "cook",
     "can", "cosmic", "change", "capital", "city", "clock",
-    "cold", "come", "could", "cry", "d", "deep",
+    "cold", "come", "could", "cry", "d", "deep", "cos",
     "chain", "catan", "coin",
 
     "d",
