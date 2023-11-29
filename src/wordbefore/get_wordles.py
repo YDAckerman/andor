@@ -1,8 +1,21 @@
+from typing import Dict
 import requests
 import re
 from bs4 import BeautifulSoup
 import sqlite3
 
+DELETE_FROM_WORDLES = """
+
+DELETE FROM wordles;
+
+"""
+
+UPSERT_WORDLES = """
+
+INSERT INTO wordles (number, date, word)
+VALUES (:num, :date, :word);
+
+"""
 
 class WordBot:
 
@@ -19,11 +32,23 @@ class WordBot:
         tds = soup.find_all('span', class_=re.compile('c[0-9]'))
         results = [self.rm_whitespace(e.get_text()) for e in tds]
 
-        self.wordles = [results[i:i+3] for i in range(3, len(results) - 20, 3)]
+        self.wordles = [self.to_dict(results[i:i+3]) for i in range(3, len(results) - 20, 3)]
 
+    def add_all(self, cur):
+        cur.executemany(UPSERT_WORDLES, self.wordles)
+    
     @staticmethod
     def rm_whitespace(s: str) -> str:
-        return re.sub('\s', '', s)
+        return re.sub('[\n\t]', '', s)
+
+    @staticmethod
+    def to_dict(wordle) -> Dict[str, str]:
+
+        return {'num': wordle[0], 'date': wordle[1], 'word': wordle[2]}
+
+    @staticmethod
+    def delete_all(cur):
+        cur.execute(DELETE_FROM_WORDLES)
 
 
 if __name__ == '__main__':
@@ -31,6 +56,14 @@ if __name__ == '__main__':
     bot = WordBot()
     bot.get_wordles()
 
-    conn = sqlite3.connect(database="andor.db")
+    conn = sqlite3.connect(database="../../instance/andor.db")
     cur = conn.cursor()
+
+    # reset
+    bot.delete_all(cur)
+    bot.add_all(cur)
+
+    conn.commit()
+    conn.close()
+
 
