@@ -43,6 +43,12 @@ DELETE FROM magnets;
 
 """
 
+search_wordles = """
+
+SELECT date FROM wordles WHERE word = :word;
+
+"""
+
 insert_words = """
 
 INSERT INTO magnets (rowid, word, top, left)

@@ -4,6 +4,7 @@ from components.header import HEADER
 from components.welcome import WELCOME
 from components.messages import record_message
 from components.fridge import get_magnets, update_magnets
+from components.word_search import word_search
 from src.db.db import init_app as db_init_app, get_conn
 from werkzeug.middleware.proxy_fix import ProxyFix
 
@@ -42,6 +43,23 @@ def andor():
                            message=WELCOME,
                            response=response)
 
+
+@app.route("/wordbefore", methods=['GET', 'POST'])
+def wordbefore():
+
+    response = ""
+
+    if request.method == 'POST':
+        word = request.form.get("word").upper()
+        result = word_search(word)
+        if len(result) == 1:
+            response = [word + ":", "Yes, on " + result[0][0].split(", ")[1]]
+        else:
+            response = [word + ":", "Not a Wordle yet!!!"]
+
+    return render_template("wordbefore.html",
+                           header=HEADER,
+                           response=response)
 
 @app.route("/more")
 def more():
