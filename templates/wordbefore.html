@@ -1,0 +1,41 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+<div style="width: 100%; 
+          display: flex; 
+          justify-content: center;">
+  <h2>Was it a Wordle?!</h2>
+</div>  
+<div style="width: 100%; 
+            display: flex; 
+            justify-content: center;
+            margin-top: 2em;">
+  
+  <form action="{{ url_for('wordbefore') }}" method="post">
+    <div style="width: 100%">
+      <h4>ENTER FIVE LETTERS:</h4>
+    </div>
+    <div style="width: 100%; display: flex; justify-content: center;">
+        <input style="width: 13em;"
+               type="text" id="word" name="word" pattern="[a-zA-Z]{5}" required>
+    </div>
+    <div style="width: 100%; display: flex; justify-content: center;
+                margin-top: 1em;">
+      <input type="submit" value="SEARCH">
+    </div>
+  </form>
+</div>
+
+<div style="width: 20%; display: flex; flex-wrap: wrap; justify-content: center;
+            margin-top: 2em;">
+  <p> {{ response[0] }} </p>
+  <p style="font-size: 12px;"> {{ response[1] }} </p>
+</div>
+
+{% endblock %}
+
+{% block footer %}
+{{ super() }}
+{% endblock %}
+
