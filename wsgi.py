@@ -31,7 +31,7 @@ def index():
 @app.route("/andor", methods=['GET', 'POST'])
 def andor():
 
-    response = ""
+    response = ["",""]
 
     if request.method == 'POST':
         get_conn()
