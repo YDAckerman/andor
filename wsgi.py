@@ -31,7 +31,7 @@ def index():
 @app.route("/andor", methods=['GET', 'POST'])
 def andor():
 
-    response = ["",""]
+    response = ""
 
     if request.method == 'POST':
         get_conn()
@@ -47,7 +47,7 @@ def andor():
 @app.route("/wordbefore", methods=['GET', 'POST'])
 def wordbefore():
 
-    response = ""
+    response = ["", ""]
 
     if request.method == 'POST':
         word = request.form.get("word").upper()
