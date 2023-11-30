@@ -53,7 +53,9 @@ def wordbefore():
         word = request.form.get("word").upper()
         result = word_search(word)
         if len(result) == 1:
-            response = [word + ":", "Yes, on " + result[0][0].split(", ")[1]]
+            print(result)
+            response = [word + ":", "Was Wordle No. " +
+                        str(int(result[0][0]))]
         else:
             response = [word + ":", "Not a Wordle yet!!!"]
 

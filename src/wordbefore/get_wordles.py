@@ -17,10 +17,11 @@ VALUES (:num, :date, :word);
 
 """
 
+
 class WordBot:
 
-    # url = "https://wordfinder.yourdictionary.com/wordle/answers/"
-    url = "https://www.techradar.com/news/past-wordle-answers"
+    url = "https://wordfinder.yourdictionary.com/wordle/answers/"
+    # url = "https://www.techradar.com/news/past-wordle-answers"
 
     def __init__(self):
         self.wordles = None
@@ -29,17 +30,19 @@ class WordBot:
 
         raw_resp = requests.get(self.url)
         soup = BeautifulSoup(raw_resp.text, 'html.parser')
-        tds = soup.find_all('span', class_=re.compile('c[0-9]'))
-        results = [self.rm_whitespace(e.get_text()) for e in tds]
+        tds = soup.find_all('td')
+        results = [self.rm_whitespace(e.get_text())
+                   for e in tds]
 
-        self.wordles = [self.to_dict(results[i:i+3]) for i in range(3, len(results) - 20, 3)]
+        self.wordles = [self.to_dict(results[i:i+3])
+                        for i in range(3, len(results)-2, 3)]
 
     def add_all(self, cur):
         cur.executemany(UPSERT_WORDLES, self.wordles)
 
     def has_wordles(self):
-        return len(self.wordles) > 921
-    
+        return len(self.wordles) > 800
+
     @staticmethod
     def rm_whitespace(s: str) -> str:
         return re.sub('[\n\t]', '', s)
@@ -47,7 +50,9 @@ class WordBot:
     @staticmethod
     def to_dict(wordle) -> Dict[str, str]:
 
-        return {'num': wordle[0], 'date': wordle[1], 'word': wordle[2]}
+        return {'num': wordle[1],
+                'date': wordle[0],
+                'word': wordle[2]}
 
     @staticmethod
     def delete_all(cur):
@@ -70,5 +75,3 @@ if __name__ == '__main__':
 
         conn.commit()
         conn.close()
-
-

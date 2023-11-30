@@ -45,7 +45,7 @@ DELETE FROM magnets;
 
 search_wordles = """
 
-SELECT date FROM wordles WHERE word = :word;
+SELECT number FROM wordles WHERE word = :word;
 
 """
 
