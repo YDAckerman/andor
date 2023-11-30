@@ -36,6 +36,9 @@ class WordBot:
 
     def add_all(self, cur):
         cur.executemany(UPSERT_WORDLES, self.wordles)
+
+    def has_wordles(self):
+        return len(self.wordles) > 921
     
     @staticmethod
     def rm_whitespace(s: str) -> str:
@@ -56,14 +59,16 @@ if __name__ == '__main__':
     bot = WordBot()
     bot.get_wordles()
 
-    conn = sqlite3.connect(database="../../instance/andor.db")
-    cur = conn.cursor()
+    if bot.has_wordles():
 
-    # reset
-    bot.delete_all(cur)
-    bot.add_all(cur)
+        conn = sqlite3.connect(database="../../instance/andor.db")
+        cur = conn.cursor()
 
-    conn.commit()
-    conn.close()
+        # reset
+        bot.delete_all(cur)
+        bot.add_all(cur)
+
+        conn.commit()
+        conn.close()
 
 
