@@ -14,5 +14,5 @@ else
 fi
 
 deactivate
-
+cd
 
