@@ -1,3 +1,4 @@
+#!/bin/sh
 
 DATE=$(/usr/bin/date)
 
@@ -5,7 +6,7 @@ cd ~/andor
 source venv/bin/activate
 cd ./src/wordbefore/
 
-python3 get_wordles.py
+/bin/python3 get_wordles.py
 
 if [[ $? -eq 0 ]]; then 
     echo "wordles updated on $DATE"
