@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 DATE=$(/usr/bin/date)
 
