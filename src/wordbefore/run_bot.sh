@@ -3,7 +3,7 @@
 DATE=$(/usr/bin/date)
 
 cd ~/andor
-source venv/bin/activate
+. venv/bin/activate
 cd ./src/wordbefore/
 
 /bin/python3 get_wordles.py
