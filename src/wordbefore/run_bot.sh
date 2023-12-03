@@ -1,7 +1,7 @@
 #!/bin/bash
 DATE=$(/usr/bin/date)
 
-~/andor/venv/bin/python3 ~/andor/src/wordbefore/get_wordles.py
+/home/$(whoami)/andor/venv/bin/python3 /home/$(whoami)/andor/src/wordbefore/get_wordles.py
 
 if [[ $? -eq 0 ]]; then 
     echo "wordles updated on $DATE"
