@@ -61,16 +61,21 @@ class WordBot:
 
 if __name__ == '__main__':
 
+    print("Prepping WordBot")
     bot = WordBot()
+    print("Getting Wordles")
     bot.get_wordles()
 
     if bot.has_wordles():
 
+        
         conn = sqlite3.connect(database="../../instance/andor.db")
         cur = conn.cursor()
 
         # reset
+        print("Resetting Wordles table")
         bot.delete_all(cur)
+        print("Inserting Wordles")
         bot.add_all(cur)
 
         conn.commit()
