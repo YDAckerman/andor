@@ -68,19 +68,25 @@ if __name__ == '__main__':
     bot.get_wordles()
 
     if bot.has_wordles():
-
         
-        conn = sqlite3.connect(database=sys.argv[1] + "instance/andor.db")
-        cur = conn.cursor()
+        try:
+            conn = sqlite3.connect(database=sys.argv[1] + "instance/andor.db")
+            cur = conn.cursor()
+        except Exception as e:
+            sys.exit(str(e))
 
         # reset
-        print("Resetting Wordles table")
-        bot.delete_all(cur)
-        print("Inserting Wordles")
-        bot.add_all(cur)
+        try:
+            print("Resetting Wordles table")
+            bot.delete_all(cur)
+            print("Inserting Wordles")
+            bot.add_all(cur)
+            conn.commit()
+            conn.close()
+            
+        except Exception as e:
+            sys.exit(str(e))
 
-        conn.commit()
-        conn.close()
+        sys.exit(0)
         
-    else:
-        sys.exit("Bot failed to get Wordles")
+    sys.exit("Bot failed to get Wordles")
