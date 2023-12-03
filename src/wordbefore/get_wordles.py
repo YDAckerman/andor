@@ -1,3 +1,4 @@
+import sys
 from typing import Dict
 import requests
 import re
@@ -69,7 +70,7 @@ if __name__ == '__main__':
     if bot.has_wordles():
 
         
-        conn = sqlite3.connect(database="../../instance/andor.db")
+        conn = sqlite3.connect(database=sys.argv[1] + "instance/andor.db")
         cur = conn.cursor()
 
         # reset
@@ -80,3 +81,6 @@ if __name__ == '__main__':
 
         conn.commit()
         conn.close()
+        
+    else:
+        sys.exit("Bot failed to get Wordles")
