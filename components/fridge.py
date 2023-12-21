@@ -15,7 +15,6 @@ def update_magnets(data):
 
     new_words = [to_dict(k, v) for k, v in data]
 
-    print(new_words)
     db_submit_many(insert_words, new_words)
 
     pass

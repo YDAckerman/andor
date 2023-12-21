@@ -11,11 +11,20 @@
 {% block scripts %}
 
 var magnets = document.getElementsByClassName("magnet");
-
+const wm = new WeakMap();
+    
 for (let i = 0; i < magnets.length; i++) {
+    wm.set(magnets[i], true);
     dragElement(magnets[i]);
 }
 
+function updateElement(elmnt, update) {
+    if (wm.get(elmnt)){
+       elmnt.style.top = update[2] + "px";
+       elmnt.style.left = update[3] + "px";
+    }
+}
+                    
 // Sources:
 // https://www.w3schools.com/howto/howto_js_draggable.asp
 // https://www.redblobgames.com/making-of/draggable/
@@ -26,6 +35,7 @@ function dragElement(elmnt) {
     function dragPointerDown(e) {
         e = e || window.event;
         e.preventDefault();
+        wm.set(elmnt, false);
         // get the mouse cursor position at startup:
         pos3 = e.clientX;
         pos4 = e.clientY;
@@ -45,25 +55,41 @@ function dragElement(elmnt) {
         // set the element's new position:
         elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
         elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+        postNewPosition();
     }
 
     function closeDragElement() {
         /* stop moving when mouse button is released:*/
         postNewPosition();
-        
+
+        wm.set(elmnt, true);        
         document.onpointerup = null;
         document.onpointermove = null;
     }
 
     function postNewPosition() {
-        
         w = elmnt.children[0].innerHTML;
         var data = new FormData();
         data.append(w + "_" + elmnt.id,
                     elmnt.offsetTop + "_" + elmnt.offsetLeft);
         navigator.sendBeacon("/fridge", data);
-        
     }
 }
+
+async function updateMagnets() {
+
+     var response = await fetch("/magnets").catch((error) =>
+                         console.error("HTTPS Error: " + error));
+     var magnets = await response.json();
+
+     for (let i = 0; i < magnets.length; i++) {
+         updateElement(document.getElementById(magnets[i][0]),
+                       magnets[i])
+     }
+ 
+}
+
+
+setInterval(updateMagnets, 1000);
 
 {% endblock %}

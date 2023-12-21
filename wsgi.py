@@ -53,7 +53,6 @@ def wordbefore():
         word = request.form.get("word").upper()
         result = word_search(word)
         if len(result) == 1:
-            print(result)
             response = [word + ":", "Was Wordle No. " +
                         str(int(result[0][0]))]
         else:
@@ -87,3 +86,13 @@ def fridge():
     return render_template("fridge.html",
                            header=HEADER,
                            magnets=magnets)
+
+@app.route("/magnets", methods=['GET'])
+def magnets():
+    get_conn()
+    return get_magnets()
+
+# figure out how to return json
+# keep a timestamp in the magnets table - actually, since I have once source of truth, no need
+# regularly get magnet data json
+# async update position of all magnets on screen whose position has changed. 
