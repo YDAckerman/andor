@@ -9,14 +9,14 @@ BEEP_COLOR = "Yellow"
 MSG_LINES = [
     "hi!                   ",
     "                      ",
-    "you've reached yoni.  ",
-    "i'm away from my      ",
-    "website right now.    ",
-    "please leave a message",
-    "after the...          ",
+    "i'm yoni.             ",
+    "andor.life is a       ",
+    "website               ",
+    "where i play around.  ",
+    "thanks for            ",
+    "stopping by!          ",
     "                      ",
-    "                      ",
-    "*BEEP*"
+    "    :)"
 ]
 
 BEEP_BITMAP = NestedBitmap(MSG_LINES[-1], BITS, PAD, UNITS, BEEP_COLOR)
