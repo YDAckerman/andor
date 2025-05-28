@@ -142,3 +142,8 @@ a:hover {
     margin-bottom: 3em;
 }
 
+img {
+    max-width: 70%;
+    height: auto;
+    width: auto\9;
+}

@@ -5,8 +5,8 @@ PAD = [1, 0]
 BITS = 16
 R = 1.2 / BITS
 HEIGHT = R * BITS
-RIGHT_MSG = '&more'
-LEFT_MSG = 'a/o'
+RIGHT_MSG = 'more'
+LEFT_MSG = 'andor.life'
 
 FRONT_COLOR, LINK_COLOR = ['Red', 'Blue']
 

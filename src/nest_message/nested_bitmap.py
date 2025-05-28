@@ -13,6 +13,12 @@ COLORS = {"Yellow": '#ffd866',
           "Purple": '#ab9df2',
           "Black": '#2c292d'}
 
+GREY_SCALE = ["#2c292e", "#3b3440",
+              "#493f53", "#584b67",
+              "#66577d", "#756492",
+              "#8371a9", "#907fc1",
+              "#9d8dd9", "#aa9cf2"]
+
 
 class NestedBitmap():
 
